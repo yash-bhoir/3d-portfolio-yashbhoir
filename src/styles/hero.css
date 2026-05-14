@@ -130,7 +130,7 @@
 }
 .hero__phrase-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 6.2vw, 5.6rem);
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
   font-weight: 700; line-height: 1.0;
   letter-spacing: -.03em; color: var(--white);
 }
@@ -142,6 +142,8 @@
   display: inline-block; transform: translateY(105%);
   transition: transform .6s cubic-bezier(0.16,1,0.3,1);
 }
+/* accent-coloured words (orange) */
+.hero__word-acc { color: var(--orange); }
 .hero__phrase--enter .hero__word span { transform: translateY(0); }
 .hero__phrase--enter .hero__word:nth-child(1) span { transition-delay: .05s; }
 .hero__phrase--enter .hero__word:nth-child(2) span { transition-delay: .12s; }
@@ -194,6 +196,39 @@
 }
 .hero__meta-item .v { font-size: 13px; color: var(--white); font-weight: 500; }
 .hero__meta-item .v .acc { color: var(--orange); }
+
+/* ─── Bottom-Right Stack (CTA above, meta below) ─────────────────────────── */
+.hero__br-stack {
+  position: absolute;
+  right: 3.5vw;
+  bottom: 48px;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  animation: panelIn .9s cubic-bezier(0.16,1,0.3,1) .8s both;
+}
+/* override right-panel meta styles when inside the stack */
+.hero__br-stack .hero__meta-row {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  gap: 20px;
+}
+
+/* ─── Bottom-Right CTA ───────────────────────────────────────────────────── */
+.hero__cta-br {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--orange); color: #fff;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: .04em;
+  padding: 13px 22px 13px 8px;
+  border-radius: 100px;
+  box-shadow: 0 10px 32px -8px var(--glow);
+  transition: background .25s, transform .2s, box-shadow .25s;
+}
+.hero__cta-br:hover { background: var(--acc-hover); transform: translateY(-2px); box-shadow: 0 14px 36px -8px var(--glow-h); }
+.hero__cta-br:hover .hero__cta-arrow { transform: rotate(-45deg); }
 
 /* ─── Giant Name ─────────────────────────────────────────────────────────── */
 .hero__giant-name, .hero__giant-name-stroke {
@@ -295,10 +330,149 @@
   letter-spacing: .2em; color: var(--tx-4); text-transform: uppercase;
 }
 
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
-@media (max-width: 880px) {
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — 4 tiers
+   1440+  base (above)
+   1024–1439  desktop narrow
+   768–1023   tablet
+   480–767    mobile
+   <480       small mobile
+════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Right panel permanently hidden (replaced by bottom-right CTA) ─────── */
+.hero__right-panel { display: none !important; }
+
+/* ─── Desktop narrow (1024–1439) ─────────────────────────────────────────── */
+@media (max-width: 1439px) {
+  .hero__text-stage  { width: 58vw; }
+  .hero__giant-name,
+  .hero__giant-name-stroke { font-size: clamp(100px, 16vw, 200px); }
+}
+
+/* ─── Tablet (768–1023) ──────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .hero__navbar { left: 20px; right: 20px; top: 18px; }
+  .hero__nav-link { display: none; }
+
+  .hero__text-stage { width: 60vw; left: 4vw; bottom: 20vh; }
+  .hero__phrase-headline { font-size: clamp(2.4rem, 5.5vw, 4.5rem); }
+
+  .hero__right-panel {
+    width: min(240px, 28vw);
+    right: 2.5vw;
+  }
+  .hero__right-bio { font-size: 13px; }
+
+  .hero__avail-badge { bottom: calc(20vh + 160px); font-size: 10px; }
+
+  .hero__giant-name,
+  .hero__giant-name-stroke { font-size: clamp(90px, 14vw, 160px); }
+
+  .hero__corner-tag { left: 20px; }
+  .hero__scroll-hint { right: 72px; }
+  .hero__frame { inset: 10px; border-radius: 18px; }
+
+  .hero__br-stack { right: 2.5vw; bottom: 44px; gap: 12px; }
+  .hero__cta-br { font-size: 12px; padding: 11px 18px 11px 7px; }
+}
+
+/* ─── Mobile (480–767) ───────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Frame */
+  .hero__frame { inset: 6px; border-radius: 14px; }
+
+  /* Navbar — keep pill + hamburger only, hide right side */
+  .hero__navbar { top: 12px; left: 12px; right: 12px; }
+  .hero__nav-right { display: none; }
+
+  /* Badge hidden — clutters small screen */
+  .hero__avail-badge { display: none; }
+
+  /* Text takes full width */
+  .hero__text-stage { width: 90vw; left: 5vw; bottom: 18vh; }
+  .hero__phrase-headline {
+    font-size: clamp(2rem, 9vw, 3.6rem);
+    letter-spacing: -.02em;
+  }
+  .hero__phrase-label { font-size: 9px; letter-spacing: .16em; margin-bottom: 10px; }
+
+  /* Right panel hidden */
   .hero__right-panel { display: none; }
-  .hero__text-stage  { width: 88vw; }
-  .hero__avail-badge { bottom: calc(18vh + 220px); }
-  .hero__nav-link    { display: none; }
+
+  /* Giant name — still visible, scaled down */
+  .hero__giant-name,
+  .hero__giant-name-stroke {
+    font-size: clamp(72px, 22vw, 130px);
+    letter-spacing: .02em;
+  }
+
+  /* Progress bar hidden — too cramped */
+  .hero__progress-bar { display: none; }
+
+  /* Bottom-right stack — move up so it doesn't overlap corner/hint */
+  .hero__br-stack {
+    right: 12px;
+    bottom: 48px;
+    gap: 10px;
+  }
+  .hero__cta-br {
+    font-size: 11px;
+    padding: 10px 16px 10px 6px;
+    gap: 8px;
+  }
+  .hero__cta-br .hero__cta-arrow {
+    width: 26px; height: 26px;
+  }
+  .hero__br-stack .hero__meta-row {
+    gap: 14px;
+  }
+  .hero__meta-item .k { font-size: 9px; }
+  .hero__meta-item .v { font-size: 11px; }
+
+  /* Corner & scroll hint */
+  .hero__corner-tag { left: 12px; bottom: 14px; font-size: 9px; letter-spacing: .14em; }
+  .hero__scroll-hint { display: none; }
+}
+
+/* ─── Small mobile (<480) ────────────────────────────────────────────────── */
+@media (max-width: 479px) {
+  .hero__frame { inset: 4px; border-radius: 10px; }
+  .hero__navbar { top: 10px; left: 10px; right: 10px; }
+  .hero__nav-pill { padding: 8px 14px; gap: 8px; }
+  .hero__nav-logo-text { font-size: 12px; }
+
+  .hero__text-stage { width: 92vw; left: 4vw; bottom: 15vh; }
+  .hero__phrase-headline {
+    font-size: clamp(1.8rem, 10vw, 3rem);
+    letter-spacing: -.01em;
+    line-height: 1.05;
+  }
+  .hero__phrase-label { font-size: 8px; letter-spacing: .12em; margin-bottom: 8px; }
+
+  .hero__giant-name,
+  .hero__giant-name-stroke {
+    font-size: clamp(60px, 24vw, 110px);
+    letter-spacing: .03em;
+  }
+
+  /* Bottom-right stack — compact on tiny screens */
+  .hero__br-stack {
+    right: 10px;
+    bottom: 44px;
+    gap: 8px;
+  }
+  .hero__cta-br {
+    font-size: 10px;
+    padding: 9px 14px 9px 6px;
+  }
+  .hero__br-stack .hero__meta-row { gap: 12px; }
+  .hero__meta-item .k { font-size: 8px; letter-spacing: .12em; }
+  .hero__meta-item .v { font-size: 10px; }
+
+  /* Hide decorative elements on tiny screens */
+  .hero__corner-tag  { display: none; }
+  .hero__scroll-hint { display: none; }
+
+  /* Loading bar wider */
+  .hero__loading-bar { max-width: 160px; }
 }

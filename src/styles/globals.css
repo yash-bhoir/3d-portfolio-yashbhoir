@@ -91,3 +91,19 @@ button { cursor: pointer; border: none; background: none; }
   position: fixed; inset: 0; width: 100vw; height: 100vh;
   z-index: -1; pointer-events: none; display: block;
 }
+
+/* ─── Touch / no-hover devices ───────────────────────────────────────────── */
+/* Restore default cursor + hide custom cursor overlay on touch screens */
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor__dot, .cursor__ring { display: none; }
+  /* SplashCursor canvas also hidden — fluid effect requires pointer precision */
+  #fluid { display: none; }
+}
+
+/* ─── Responsive base utilities ──────────────────────────────────────────── */
+/* Prevent layout blowout on very small viewports */
+@media (max-width: 479px) {
+  html { font-size: 15px; }
+  .grain { opacity: .07; } /* slightly less grain on small screens */
+}

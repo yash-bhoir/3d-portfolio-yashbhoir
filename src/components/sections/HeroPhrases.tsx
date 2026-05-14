@@ -21,7 +21,9 @@ const HeroPhrases: React.FC<Props> = ({ activePhrase, pastPhrases }) => (
         <div className="hero__phrase-headline">
           {phrase.words.map((word, wi) => (
             <div key={wi} className="hero__word">
-              <span>{word}</span>
+              <span className={word.accent ? 'hero__word-acc' : undefined}>
+                {word.text}
+              </span>
             </div>
           ))}
         </div>

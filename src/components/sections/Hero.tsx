@@ -4,7 +4,6 @@ import { useHeroScroll } from '@hooks/useHeroScroll';
 import { HERO_PHRASES } from '@constants/heroPhrase';
 import HeroNav from './HeroNav';
 import HeroPhrases from './HeroPhrases';
-import HeroRightPanel from './HeroRightPanel';
 import HeroCanvas from './HeroCanvas';
 
 const Hero: React.FC = () => {
@@ -19,10 +18,8 @@ const Hero: React.FC = () => {
     <div className="hero__scroll-container" ref={containerRef}>
       <div className="hero__stage">
 
-        {/* Outer frame border */}
         <div className="hero__frame" />
 
-        {/* Frame-based canvas — scroll-scrubbed from 121 JPEG frames */}
         <div className="hero__media-layer">
           <HeroCanvas containerRef={containerRef} />
         </div>
@@ -32,14 +29,34 @@ const Hero: React.FC = () => {
         {/* Available badge */}
         <div className="hero__avail-badge" style={{ opacity: badgeOpacity }}>
           <div className="hero__avail-dot" />
-          Available for Work
+          Available for Work · 2026
         </div>
 
         <HeroPhrases activePhrase={activePhrase} pastPhrases={pastPhrases} />
 
-        <HeroRightPanel />
+        {/* Meta stats + CTA — bottom right */}
+        <div className="hero__br-stack">
+          <a href="#projects" className="hero__cta-br">
+            <div className="hero__cta-arrow">→</div>
+            See my works
+          </a>
+          <div className="hero__meta-row">
+            <div className="hero__meta-item">
+              <span className="k">Exp</span>
+              <span className="v"><span className="acc">3+</span></span>
+            </div>
+            <div className="hero__meta-item">
+              <span className="k">Projects</span>
+              <span className="v">20+</span>
+            </div>
+            <div className="hero__meta-item">
+              <span className="k">Location</span>
+              <span className="v">Mumbai</span>
+            </div>
+          </div>
+        </div>
 
-        {/* Giant name — fades in after 82% scroll */}
+        {/* Giant name */}
         <div
           className="hero__giant-name"
           style={{ opacity: giantOpacity, transform: `translateX(-50%) translateY(${giantTranslateY}px)` }}
