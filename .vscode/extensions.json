@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "ES7-Community.extension-bundle",
+    "bradlc.vscode-tailwindcss",
+    "wallabyjs.quokka-vscode",
+    "christophermoll.keybindings-for-chrome-devtools",
+    "ms-vscode.live-server"
+  ]
+}

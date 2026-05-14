@@ -1,0 +1,93 @@
+/* ─── Bogam DCU ──────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Bogam DCU';
+  src:
+    url('/fonts/Bogam.otf') format('opentype'),
+    url('/fonts/Bogam.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --bg:          #0A0807;
+  --bg-1:        #141210;
+  --bg-2:        #1c1814;
+
+  --white:       #F0EDE8;
+  --tx-2:        #E5E5E5;
+  --tx-3:        #A1A1AA;
+  --tx-4:        #71717A;
+  --muted:       rgba(240,237,232,0.45);
+
+  --orange:      #FF5A1F;
+  --orange2:     #FF6B00;
+  --acc-soft:    #FF7A1A;
+  --acc-deep:    #D94700;
+  --acc-hover:   #FF8C42;
+  --glow:        rgba(255,90,31,0.45);
+  --glow-h:      rgba(255,106,0,0.55);
+
+  --border-1:    rgba(255,255,255,0.08);
+  --border-2:    rgba(255,255,255,0.05);
+  --border-acc:  rgba(255,106,0,0.35);
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+img, video, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { cursor: pointer; border: none; background: none; }
+
+/* ─── Grain ──────────────────────────────────────────────────────────────── */
+.grain {
+  position: fixed; inset: 0; z-index: 100; pointer-events: none;
+  opacity: .10;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────────────────────── */
+.cursor__dot {
+  position: fixed;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--white);
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width .2s, height .2s;
+}
+.cursor__ring {
+  position: fixed;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(240,237,232,.45);
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width .25s, height .25s;
+}
+.cursor__dot--hover  { width: 5px;  height: 5px; }
+.cursor__ring--hover { width: 52px; height: 52px; }
+
+/* ─── Topo Background Canvas ─────────────────────────────────────────────── */
+.animated-background {
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  z-index: -1; pointer-events: none; display: block;
+}
